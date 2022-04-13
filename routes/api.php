@@ -18,18 +18,29 @@ use App\Http\Controllers\ProductController;
 //     return $request->user();
 // });
 
-Route::middleware('auth_api')->get('/user/{id}', function(Request $request, $id){
+Route::middleware('auth_api')->get('/user/{id}', function (Request $request, $id) {
     $user = \App\Models\User::find($id);
-    if(!$user) return response('', 404);
+    if (!$user) return response('', 404);
     return $user;
 });
 
-Route::post(
-    '/token/create',
-    [\App\Http\Controllers\ApiTokenController::class, 'createToken']
+
+Route::group(
+    ['middleware' => 'auth_api'],
+    function () {
+        // Route::get('/index',  [ProductController::class, 'index']);
+        // Route::get('/product/{id}',  [ProductController::class, 'productCategories']);
+
+
+
+        Route::post(
+            '/token/create',
+            [\App\Http\Controllers\ApiTokenController::class, 'createToken']
+        );
+    }
 );
-
-
 Route::get('/index',  [ProductController::class, 'index']);
-
 Route::get('/product/{id}',  [ProductController::class, 'productCategories']);
+Route::post('/productName',  [ProductController::class, 'sortByName']);
+
+// Route::get('/index',  [ProductController::class, 'index']);

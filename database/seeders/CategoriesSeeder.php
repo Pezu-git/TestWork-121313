@@ -22,7 +22,7 @@ class CategoriesSeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Город',
+            'name' => 'LifeStyle',
             'description' => 'Кросовки для повседневной жизни',
         ]);
 

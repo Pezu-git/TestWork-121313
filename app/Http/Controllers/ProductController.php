@@ -16,10 +16,13 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function index() {
-        // $blogs = $this->productRepository->all();
-        // return $blogs;
-        // $category = Category::find(2);
+    public function index()
+    {
+
+        $allProd = $this->productRepository->all();
+        return $allProd;
+        // $categories = Category::find([3, 5]);
+        // $allProd[4]->categories()->attach($categories);
         // return $category->products;
         // $product = Product::create([
         //     'name'  =>  'Home Brixton Faux Leather Armchair',
@@ -28,23 +31,27 @@ class ProductController extends Controller
         // $categories = Category::find([2,3]); // Modren Chairs, Home Chairs
         // $product->categories()->attach($categories);
 
-        
-        // $p = $category->products;
-        // $product = Product::find(2);
-        // $c = $product->category;
-        // $all = Product::all();
-        // dd($category->products); 
 
-        $prod = Product::find(1);
-        foreach ($prod->categories as $role) {
-            return $role->pivot;
-        }
+        // $prod = $this->productRepository->all()->find(1);
+
+        // foreach ($prod->categories as $role) {
+        //     return $role->pivot;
+        // }
     }
 
-    
 
-    public function productCategories($id) {
-        $cat = $this->productRepository->getCategories($id);
-        return $cat;
+
+    public function productCategories($id)
+    {
+        $product = $this->productRepository->getCategories($id);
+        return $product;
+    }
+
+    public function sortByName(Request $request)
+    {
+        $a = $request->all();
+
+        $product = $this->productRepository->getName($a);
+        return $product;
     }
 }
