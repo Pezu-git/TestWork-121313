@@ -36,3 +36,8 @@ Route::post('/product/sortByPrice',  [ProductController::class, 'sortByPrice']);
 
 Route::get('/category',  [CategoryController::class, 'getAllCategory']);
 Route::get('/category/{id}',  [CategoryController::class, 'productCategories']);
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
