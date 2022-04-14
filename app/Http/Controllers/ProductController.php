@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Product;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 
 class ProductController extends Controller
@@ -16,27 +15,10 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function index()
+    public function getAllProduct()
     {
-
         $allProd = $this->productRepository->all();
         return $allProd;
-        // $categories = Category::find([3, 5]);
-        // $allProd[4]->categories()->attach($categories);
-        // return $category->products;
-        // $product = Product::create([
-        //     'name'  =>  'Home Brixton Faux Leather Armchair',
-        //     'price' =>  199.99,
-        // ]);
-        // $categories = Category::find([2,3]); // Modren Chairs, Home Chairs
-        // $product->categories()->attach($categories);
-
-
-        // $prod = $this->productRepository->all()->find(1);
-
-        // foreach ($prod->categories as $role) {
-        //     return $role->pivot;
-        // }
     }
 
 
@@ -47,11 +29,66 @@ class ProductController extends Controller
         return $product;
     }
 
-    public function sortByName(Request $request)
+    public function sortByCatId(Request $request)
     {
-        $a = $request->all();
+        $allProd = $this->productRepository->all();
+        $arr = [];
 
-        $product = $this->productRepository->getName($a);
-        return $product;
+        foreach ($allProd as $key => $prod) {
+            $pivotArr = [];
+            for ($i = 0; $i < count($prod->categories); $i++) {
+                $findCatPivot = $prod->categories[$i]->id;
+                array_push($pivotArr, $findCatPivot);
+            }
+            if (count($prod->categories) === count($request->name)) {
+                $result = array_diff($pivotArr, $request->name);
+                if (count($result) === 0) {
+                    array_push($arr, $prod);
+                }
+            }
+            if (count($prod->categories) > count($request->name)) {
+                $result = array_diff($request->name, $pivotArr);
+                if (count($result) === 0) {
+                    array_push($arr, $prod);
+                }
+            }
+        }
+        return $arr;
+    }
+
+    public function sortByPrice(Request $request)
+    {
+        $reqPrice = $request->price;
+        $allProd = $this->productRepository->all();
+        $arr = [];
+        foreach ($allProd as $key => $prod) {
+            if ($reqPrice['min'] <= $prod->price && $prod->price <= $reqPrice['max']) {
+                array_push($arr, $prod);
+            }
+        }
+        return $arr;
+    }
+
+    public function setPivot()
+    {
+        $allProd = $this->productRepository->all();
+
+        $categories0 = Category::find([1, 5]);
+        $allProd[1]->categories()->attach($categories0);
+        $allProd[2]->categories()->attach($categories0);
+        $allProd[6]->categories()->attach($categories0);
+
+        $categories1 = Category::find([2]);
+        $allProd[7]->categories()->attach($categories1);
+
+        $categories2 = Category::find([1, 4, 3]);
+        $allProd[5]->categories()->attach($categories2);
+
+        $categories3 = Category::find([3, 4]);
+        $allProd[0]->categories()->attach($categories3);
+
+        $categories4 = Category::find([3, 5]);
+        $allProd[3]->categories()->attach($categories4);
+        $allProd[4]->categories()->attach($categories4);
     }
 }

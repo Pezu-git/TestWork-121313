@@ -10,6 +10,4 @@ interface ProductRepositoryInterface
     public function all();
 
     public function getCategories(Product $id);
-
-    public function getName($request);
 }

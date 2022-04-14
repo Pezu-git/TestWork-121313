@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
   public function run()
   {
     DB::table('users')->insert([
+      'name' => 'Uve',
       'remember_token' => Str::random(20),
     ]);
   }

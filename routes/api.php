@@ -3,20 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use App\Http\Controllers\CategoryController;
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+
 
 Route::middleware('auth_api')->get('/user/{id}', function (Request $request, $id) {
     $user = \App\Models\User::find($id);
@@ -28,19 +17,22 @@ Route::middleware('auth_api')->get('/user/{id}', function (Request $request, $id
 Route::group(
     ['middleware' => 'auth_api'],
     function () {
-        // Route::get('/index',  [ProductController::class, 'index']);
-        // Route::get('/product/{id}',  [ProductController::class, 'productCategories']);
+        Route::get('/user',  function () {
+            $user = \App\Models\User::all();
+            return $user;
+        });
 
-
-
-        Route::post(
+        Route::get(
             '/token/create',
             [\App\Http\Controllers\ApiTokenController::class, 'createToken']
         );
     }
 );
-Route::get('/index',  [ProductController::class, 'index']);
-Route::get('/product/{id}',  [ProductController::class, 'productCategories']);
-Route::post('/productName',  [ProductController::class, 'sortByName']);
 
-// Route::get('/index',  [ProductController::class, 'index']);
+Route::get('/product',  [ProductController::class, 'getAllProduct']);
+Route::get('/product/{id}',  [ProductController::class, 'productCategories']);
+Route::post('/product/sortByCat',  [ProductController::class, 'sortByCatId']);
+Route::post('/product/sortByPrice',  [ProductController::class, 'sortByPrice']);
+
+Route::get('/category',  [CategoryController::class, 'getAllCategory']);
+Route::get('/category/{id}',  [CategoryController::class, 'productCategories']);
