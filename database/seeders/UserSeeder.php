@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
   {
     DB::table('users')->insert([
       'name' => 'Uve',
-      'remember_token' => Str::random(20),
+      'remember_token' => 'hFgh4k:Lk533fgdkj64657',
     ]);
   }
 }
