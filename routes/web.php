@@ -17,10 +17,7 @@ Route::middleware('auth_api')->get('/user/{id}', function (Request $request, $id
 Route::group(
     ['middleware' => 'auth_api'],
     function () {
-        Route::get('/user',  function () {
-            $user = \App\Models\User::all();
-            return $user;
-        });
+
 
         // Route::get(
         //     '/token/create',
@@ -41,7 +38,7 @@ Route::get('/category/{id}',  [CategoryController::class, 'productCategories']);
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get(
-    '/token/create',
-    [\App\Http\Controllers\ApiTokenController::class, 'createToken']
-);
+Route::get('/user',  function () {
+    $user = \App\Models\User::all();
+    return $user;
+});
