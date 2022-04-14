@@ -7,11 +7,6 @@ use App\Http\Controllers\CategoryController;
 
 
 
-Route::middleware('auth_api')->get('/user/{id}', function (Request $request, $id) {
-    $user = \App\Models\User::find($id);
-    if (!$user) return response('', 404);
-    return $user;
-});
 
 
 Route::group(
