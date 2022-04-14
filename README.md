@@ -26,5 +26,5 @@
 
 - /category/{id} - возвращает список товаров, входящих в данную категорию(где {id} - id категории, целое число от 1 до 5);
 
-- api/user - данный Route входит в защищенную middleware-группу. Для просмотра ссылки необходимо добавить к адресу Token запроса(либо передать его в заголовке Authorization: Bearer <token>).Значение token'a {hFgh4k:Lk533fgdkj64657}. Запрос быдет выглядеть так api/user?token=hFgh4k:Lk533fgdkj64657
+- api/user - данный Route входит в защищенную middleware-группу. Для просмотра ссылки необходимо добавить к адресу Token запроса(либо передать его в заголовке Authorization: Bearer <token>).Значение token'a {RuPUubrXdvLgc8GlgK1L}. Запрос быдет выглядеть так api/user?token=RuPUubrXdvLgc8GlgK1L
 
