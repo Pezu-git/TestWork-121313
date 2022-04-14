@@ -22,10 +22,10 @@ Route::group(
             return $user;
         });
 
-        Route::get(
-            '/token/create',
-            [\App\Http\Controllers\ApiTokenController::class, 'createToken']
-        );
+        // Route::get(
+        //     '/token/create',
+        //     [\App\Http\Controllers\ApiTokenController::class, 'createToken']
+        // );
     }
 );
 
@@ -41,3 +41,7 @@ Route::get('/category/{id}',  [CategoryController::class, 'productCategories']);
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get(
+    '/token/create',
+    [\App\Http\Controllers\ApiTokenController::class, 'createToken']
+);
