@@ -11,6 +11,8 @@
 
 В таблице products содержаться товары(кроссовки), такие как : 'Asics Fuji Trabuko', 'Asics', 'Mizuno Wave Rider 24', 'Hoka Torrent 2', 'Suacony Mad River', 'Nike Pegasus Trail GTX', 'Under Armour', 'New Balance 574'. Содержит столбцы 'id', 'name', price', 'description'.
 
+Файл с  Postman-коллекцией находится в репозитории в папке storage/app/postman или по [ссылке](https://drive.google.com/file/d/1JoFA547ohHIuWDXhJXkW1OcTgnIj9ZFV/view?usp=sharing1JoFA547ohHIuWDXhJXkW1OcTgnIj9ZFV/view?usp=sharing);
+
 
 - api/product - возвращает все строки из таблицы products
 
