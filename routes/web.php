@@ -33,7 +33,7 @@ Route::get('/category/{id}',  [CategoryController::class, 'productCategories']);
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/user',  function () {
+Route::get('/token',  function () {
     $user = \App\Models\User::all();
     return $user;
 });
