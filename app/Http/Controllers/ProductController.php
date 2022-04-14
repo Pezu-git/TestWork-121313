@@ -18,6 +18,7 @@ class ProductController extends Controller
     public function getAllProduct()
     {
         $allProd = $this->productRepository->all();
+        $this->setPivot();
         return $allProd;
     }
 
